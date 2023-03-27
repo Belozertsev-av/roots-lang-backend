@@ -80,6 +80,7 @@ class UserServiceImpl(
         userRepository.save(currUser)
     }
 
+    @Transactional
     override fun deleteUser(userId: Int) {
         val currUser = userRepository.findByIdOrNull(userId)
             ?: throw NotFoundException("User", userId)
