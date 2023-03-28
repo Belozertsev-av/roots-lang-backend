@@ -13,7 +13,7 @@ interface UserService {
 
     fun createUser(dto: UserDto): Int
 
-    fun editUser(userId: Int, dto: UserDto)
+    fun editUser(userId: Int, pass: Boolean?, dto: UserDto): String
 
     fun deleteUser(userId: Int)
 
@@ -25,5 +25,5 @@ interface UserService {
 
     fun getUserData(jwt: String?): UserDto
 
-    fun logout(response: HttpServletResponse): String
+    fun logout(jwt: String, response: HttpServletResponse): String
 }
