@@ -47,7 +47,12 @@ class UserController(private val userService: UserService) {
 
     @CrossOrigin
     @PatchMapping("/{userId}")
-    fun editUser(@PathVariable("userId") userId: Int, @RequestBody dto: UserDto) = userService.editUser(userId, dto)
+    fun editUser(
+        @PathVariable("userId") userId: Int,
+        @RequestParam("pass") pass: Boolean?,
+        @RequestBody dto: UserDto
+    ): String =
+        userService.editUser(userId, pass, dto)
 
     @CrossOrigin
     @PutMapping("/{userId}/add")

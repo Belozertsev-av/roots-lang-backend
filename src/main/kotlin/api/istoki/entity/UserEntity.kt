@@ -21,7 +21,7 @@ class UserEntity(
     @OneToMany(mappedBy = "scoresUser")
     var userLanguages: MutableList<ScoresEntity> = mutableListOf(),
 ) {
-    fun comparePassword(password: String): Boolean {
+    fun comparePassword(password: String?): Boolean {
         return BCryptPasswordEncoder().matches(password, this.userPassword)
     }
 }

@@ -65,19 +65,29 @@ class UserServiceImpl(
         return userRepository.save(dto.toEntity()).userId
     }
 
-    override fun editUser(userId: Int, dto: UserDto) {
+    override fun editUser(userId: Int, pass: Boolean?, dto: UserDto): String {
         val currUser = userRepository.findByIdOrNull(userId)
             ?: throw NotFoundException("User", userId)
+        if (pass != null) {
+            return if (currUser.comparePassword(dto.password)) {
+                "Пароль не изменен, вы ввели старый пароль"
+            } else {
+                currUser.userPassword = BCryptPasswordEncoder().encode(dto.password) ?: currUser.userPassword
+                userRepository.save(currUser)
+                "Пароль успешно изменен"
+            }
+        } else {
+            currUser.userFirstName = dto.fName ?: currUser.userFirstName
+            currUser.userLastName = dto.lName ?: currUser.userLastName
+            currUser.userPhone = dto.phoneNumber ?: currUser.userPhone
+            currUser.userLogin = dto.login
+            currUser.userPassword = dto.password ?: currUser.userPassword
+            currUser.userAvatar = dto.avatar ?: currUser.userAvatar
+            currUser.userMail = dto.mail ?: currUser.userMail
 
-        currUser.userFirstName = dto.fName ?: currUser.userFirstName
-        currUser.userLastName = dto.lName ?: currUser.userLastName
-        currUser.userPhone = dto.phoneNumber ?: currUser.userPhone
-        currUser.userLogin = dto.login ?: currUser.userLogin
-        currUser.userPassword = dto.password ?: currUser.userPassword
-        currUser.userAvatar = dto.avatar ?: currUser.userAvatar
-        currUser.userMail = dto.mail ?: currUser.userMail
-
-        userRepository.save(currUser)
+            userRepository.save(currUser)
+            return "Данные успешно обновлены"
+        }
     }
 
     @Transactional
