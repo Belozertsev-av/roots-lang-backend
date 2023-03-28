@@ -166,7 +166,7 @@ class UserServiceImpl(
         }
     }
 
-    override fun logout(response: HttpServletResponse): String {
+    override fun logout(jwt: String, response: HttpServletResponse): String {
 // Delete the method
         return "You've just logged out"
     }

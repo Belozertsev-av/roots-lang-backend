@@ -25,5 +25,5 @@ interface UserService {
 
     fun getUserData(jwt: String?): UserDto
 
-    fun logout(response: HttpServletResponse): String
+    fun logout(jwt: String, response: HttpServletResponse): String
 }

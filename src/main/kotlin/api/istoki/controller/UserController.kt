@@ -20,7 +20,7 @@ class UserController(private val userService: UserService) {
     @GetMapping("/search")
     fun getByParam(
         @RequestParam("login", required = false) login: String?,
-        @RequestParam("login", required = false) mail: String?,
+        @RequestParam("mail", required = false) mail: String?,
         @RequestParam("tel", required = false) tel: Long?,
         @RequestParam("prefix", required = false) prefix: String?
     ): Any? =
@@ -41,7 +41,7 @@ class UserController(private val userService: UserService) {
         userService.login(dto, response)
 
     @PostMapping("/logout")
-    fun logout(response: HttpServletResponse): String = userService.logout(response)
+    fun logout(@RequestBody jwt: String, response: HttpServletResponse): String = userService.logout(jwt, response)
 
     // PATCH
 
