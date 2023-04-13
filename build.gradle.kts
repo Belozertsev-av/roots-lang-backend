@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "api.istoki"
-version = "0.0.1"
+version = "0.0.4"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {

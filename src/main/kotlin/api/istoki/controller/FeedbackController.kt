@@ -13,6 +13,9 @@ class FeedbackController(private val feedbackService: FeedbackService) {
     @GetMapping
     fun getAll(@RequestParam("page") page: Int): List<FeedbackDto> = feedbackService.getAll(page)
 
+    @GetMapping("/avg")
+    fun getAvgMark(): Double = feedbackService.getAvgMark()
+
     @GetMapping("/{id}")
     fun getFeedbackById(@PathVariable("id") id: Int): FeedbackDto = feedbackService.getFeedbackById(id)
 
