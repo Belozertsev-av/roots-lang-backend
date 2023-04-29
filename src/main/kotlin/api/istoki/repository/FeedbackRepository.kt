@@ -13,5 +13,8 @@ interface FeedbackRepository : CrudRepository<FeedbackEntity, Int> {
     @Query(value = "SELECT * FROM feedback WHERE feedback_user=:Id ", nativeQuery = true)
     fun getByUserId(Id: Int?): FeedbackEntity?
 
+    @Query(value = "SELECT AVG(feedback_mark) FROM feedback", nativeQuery = true)
+    fun getAvgMark(): Double
+
     fun findByOrderByFeedbackId(pageable: Pageable): List<FeedbackEntity>
 }

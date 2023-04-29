@@ -20,6 +20,10 @@ class FeedbackServiceImpl(
         return feedbackRepository.findByOrderByFeedbackId(PageRequest.of(page, 20)).map { it.toDto() }
     }
 
+    override fun getAvgMark(): Double {
+        return feedbackRepository.getAvgMark()
+    }
+
     override fun getFeedbackById(id: Int): FeedbackDto {
         return feedbackRepository.findByUserId(id)!!.toDto()
     }

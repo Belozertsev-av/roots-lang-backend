@@ -6,6 +6,7 @@ interface FeedbackService {
 
     fun getAll(page: Int): List<FeedbackDto>
 
+    fun getAvgMark(): Double
     fun getFeedbackById(id: Int): FeedbackDto
 
     fun addFeedback(dto: FeedbackDto): String
